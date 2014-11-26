@@ -12,7 +12,12 @@ iframe
 {
 	font-family: 'proxima-nova-thin', 'HelveticaNeue-Light', 'Helvetica Neue Light', 'Helvetica Neue', Helvetica, Arial, 'Lucida Grande', sans-serif;
 	font-style: italic;
-	color: #575757;
+	color: #818181;
+}
+.typename
+{
+	font-family: 'proxima-nova-bold', 'HelveticaNeue-bold', 'Helvetica Neue bold', 'Helvetica Neue', Helvetica, Arial, 'Lucida Grande', sans-serif;
+	color: #373737;
 }
 /*!
  * Bootstrap v3.2.0 (http://getbootstrap.com)
