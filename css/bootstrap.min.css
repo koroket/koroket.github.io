@@ -3,18 +3,18 @@ iframe
 	margin-bottom: 80px;
 	margin-top: 25px;
 }
-.projectname
+.projectname h2
 {
 	font-family: 'proxima-nova-thin', 'HelveticaNeue-Light', 'Helvetica Neue Light', 'Helvetica Neue', Helvetica, Arial, 'Lucida Grande', sans-serif;
 	color: #575757;
 }
-.subtitlename
+.subtitlename h4
 {
 	font-family: 'proxima-nova-thin', 'HelveticaNeue-Light', 'Helvetica Neue Light', 'Helvetica Neue', Helvetica, Arial, 'Lucida Grande', sans-serif;
 	font-style: italic;
 	color: #818181;
 }
-.typename
+.typename h2
 {
 	font-family: 'proxima-nova-bold', 'HelveticaNeue-bold', 'Helvetica Neue bold', 'Helvetica Neue', Helvetica, Arial, 'Lucida Grande', sans-serif;
 	color: #373737;
