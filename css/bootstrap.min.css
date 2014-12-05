@@ -8,10 +8,10 @@ iframe
 	font-family: 'proxima-nova-thin', 'HelveticaNeue-Light', 'Helvetica Neue Light', 'Helvetica Neue', Helvetica, Arial, 'Lucida Grande', sans-serif;
 	color: #575757;
 }
-.cd-timeline-content h4
+.cd-timeline-content h3
 {
 	font-family: 'proxima-nova-thin', 'HelveticaNeue-Light', 'Helvetica Neue Light', 'Helvetica Neue', Helvetica, Arial, 'Lucida Grande', sans-serif;
-	color: black;
+	color: #575757;
 	text-align: center;
 }
 .cd-timeline-content .subtitlename
@@ -26,7 +26,25 @@ iframe
 	font-family: 'proxima-nova-bold', 'HelveticaNeue-bold', 'Helvetica Neue bold', 'Helvetica Neue', Helvetica, Arial, 'Lucida Grande', sans-serif;
 	color: #373737;
 }
-
+.cd-timeline-content .info
+{
+		font-family: 'proxima-nova-thin', 'HelveticaNeue-Light', 'Helvetica Neue Light', 'Helvetica Neue', Helvetica, Arial, 'Lucida Grande', sans-serif;
+	color: #575757;
+	text-align: center;
+	font-size: 16px;
+	margin-top: 50px;
+}
+.cd-timeline-content .info h4
+{
+	margin-top: 30px;
+	font-family: 'proxima-nova-thin', 'HelveticaNeue-Light', 'Helvetica Neue Light', 'Helvetica Neue', Helvetica, Arial, 'Lucida Grande', sans-serif;
+	color: #818181;
+}
+.cd-timeline-content .info h3
+{
+	margin-top: 100px;
+	font-family: 'proxima-nova-thin', 'HelveticaNeue-Light', 'Helvetica Neue Light', 'Helvetica Neue', Helvetica, Arial, 'Lucida Grande', sans-serif;
+}
 /*!
  * Bootstrap v3.2.0 (http://getbootstrap.com)
  * Copyright 2011-2014 Twitter, Inc.
