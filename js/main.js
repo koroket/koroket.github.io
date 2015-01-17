@@ -53,8 +53,8 @@ $(function(){
 		    t += 0.025;
 
 		    var r = 300;         // radius
-		    var xcenter = 750;   // center X position
-		    var ycenter = 330;   // center Y position
+		    var xcenter = (($(window).width())/2)*.9;   // center X position
+		    var ycenter = (($(window).height())/2)*.8;   // center Y position
 
 		    var newLeft = Math.floor(xcenter + (1.8*r * Math.cos(t-startx)));
 		    var newTop = Math.floor(ycenter + (r * Math.sin(t-starty)));
