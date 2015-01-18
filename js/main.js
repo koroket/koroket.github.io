@@ -43,13 +43,13 @@ $(function(){
 		yoff = 0;
 
 		moveit(0,0,"#image");
-		moveit(0.8,0.8,"#image2");
-		moveit(1.6,1.6,"#image3");
-		moveit(2.4,2.4,"#image4");
-		moveit(3.2,3.2,"#image5");
-		moveit(4.0,4.0,"#image6");
-		moveit(4.8,4.8,"#image7");
-		moveit(5.6,5.6,"#image8");
+		moveit(0.785,0.785,"#image2");
+		moveit(1.57,1.57,"#image3");
+		moveit(2.35,2.35,"#image4");
+		moveit(3.14,3.14,"#image5");
+		moveit(3.925,3.925,"#image6");
+		moveit(4.71,4.71,"#image7");
+		moveit(5.495,5.495,"#image8");
 		var t = 0;
 
 		function moveit(startx, starty, theid) {
