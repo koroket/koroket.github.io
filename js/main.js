@@ -43,10 +43,11 @@ $(function(){
 		yoff = 0;
 
 		moveit(0,0,"#image");
-		moveit(1.2,1.2,"#image2");
-		moveit(2.4,2.4,"#image3");
-		moveit(3.6,3.6,"#image4");
-		moveit(4.8,4.8,"#image5");
+		moveit(1.0,1.0,"#image2");
+		moveit(2.0,2.0,"#image3");
+		moveit(3.0,3.0,"#image4");
+		moveit(4.0,4.0,"#image5");
+		moveit(5.0,5.0,"#image6");
 		var t = 0;
 
 		function moveit(startx, starty, theid) {
@@ -54,7 +55,7 @@ $(function(){
 
 		    var r = 300;         // radius
 		    var xcenter = (($(window).width())/2)*.9;   // center X position
-		    var ycenter = (($(window).height())/2)*.8;   // center Y position
+		    var ycenter = (($(window).height())/2)*.7;   // center Y position
 
 		    var newLeft = Math.floor(xcenter + (1.8*r * Math.cos(t-startx)));
 		    var newTop = Math.floor(ycenter + (r * Math.sin(t-starty)));
@@ -62,7 +63,7 @@ $(function(){
 		    $(m).animate({
 		        top: newTop,
 		        left: newLeft,
-		    }, 350, function() {
+		    }, 500, function() {
 		        moveit(startx,starty, theid);
 		    });
 		}
