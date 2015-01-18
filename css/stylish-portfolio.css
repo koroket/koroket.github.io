@@ -297,6 +297,25 @@ footer {
     left: 0px;
     top: 0px;
 }
+#image7
+{   
+    position: absolute;
+    float: right;
+    left: 0px;
+    top: 0px;
+}
+#image8
+{   
+    position: absolute;
+    float: right;
+    left: 0px;
+    top: 0px;
+}
+#frontgit
+{
+    position: absolute;
+    bottom: 50px;
+}
 /*#image
 {
     -ms-transform: rotate(5deg);
