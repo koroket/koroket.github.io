@@ -19,15 +19,28 @@ body {
 .text-vertical-center {
     display: table-cell;
     text-align: center;
-    vertical-align: middle;
 }
 
+#tagline
+{
+    background-color: rgba(255,255,255,0.5);
+    width: 270px;
+    margin: auto;
+}
+#tagline2
+{
+            background-color: rgba(255,255,255,0.5);
+            width: 510px;
+    margin: auto;
+    margin-top: 340px;
+}
 .text-vertical-center h1 {
-    margin: 0;
+
     padding: 0;
     font-size: 4.5em;
     font-weight: 700;
 }
+
 
 /* Custom Button Styles */
 
@@ -155,7 +168,7 @@ hr.small {
     position: relative;
     width: 100%;
     height: 100%;
-    background: url(../img/bg2.jpg) no-repeat center center scroll;
+/*    background: url(../img/bg2.jpg) no-repeat center center scroll;*/
     -webkit-background-size: cover;
     -moz-background-size: cover;
     background-size: cover;
@@ -165,7 +178,7 @@ hr.small {
 /* About */
 
 .about {
-    padding: 50px 0;
+    padding: 0px;
 }
 
 /* Services */
@@ -184,8 +197,9 @@ hr.small {
     display: table;
     width: 100%;
     height: 400px;
-    color: #fff;
-    background: url(../img/callout2.jpg) no-repeat center center scroll;
+    color: white;
+    /*background: url(../img/callout2.jpg) no-repeat center center scroll;*/
+    background-color: rgba(20,20,20,.8);
     -webkit-background-size: cover;
     -moz-background-size: cover;
     background-size: cover;
@@ -195,7 +209,7 @@ hr.small {
 /* Portfolio */
 
 .portfolio {
-    padding: 50px 0;
+    padding: 0px;
 }
 
 .portfolio-item {
@@ -237,3 +251,74 @@ hr.small {
 footer {
     padding: 100px 0;
 }
+#portfolio
+{
+    margin-top: 140px;
+}
+#image
+{   
+    position: absolute;
+    float: right;
+    left: 0px;
+    top: 0px;
+}
+#image2
+{   
+    position: absolute;
+    float: right;
+    left: 0px;
+    top: 0px;
+}
+#image3
+{   
+    position: absolute;
+    float: right;
+    left: 0px;
+    top: 0px;
+}
+#image4
+{   
+    position: absolute;
+    float: right;
+    left: 0px;
+    top: 0px;
+}
+#image5
+{   
+    position: absolute;
+    float: right;
+    left: 0px;
+    top: 0px;
+}
+#image6
+{   
+    position: absolute;
+    float: right;
+    left: 0px;
+    top: 0px;
+}
+#image7
+{   
+    position: absolute;
+    float: right;
+    left: 0px;
+    top: 0px;
+}
+#image8
+{   
+    position: absolute;
+    float: right;
+    left: 0px;
+    top: 0px;
+}
+#frontgit
+{
+    position: absolute;
+    bottom: 50px;
+}
+/*#image
+{
+    -ms-transform: rotate(5deg);
+    -webkit-transform: rotate(5deg);
+    transform: rotate(5deg);
+}*/
