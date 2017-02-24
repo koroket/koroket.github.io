@@ -120,6 +120,7 @@ function loadAppsHelper(res) {
 			template.find('.app-image').attr('src',srcURL);
 			if (isApp) {
 				if (typeof app["partial"] === "string" && app["partial"].length > 0) {
+					template.find('.app-cover').attr('style',"background-image: url('" + srcURL + "');");
 					template.on('click',appOnClick(app["partial"]));
 				} else if (typeof app["callable"] === "string" && app["callable"].length > 0) {
 					var call_id = app["callable"];
