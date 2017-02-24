@@ -129,10 +129,10 @@ function youtubeVideoOnClick(){
 
 function loadProjects() {
 	parseGoogleSheets(confProjects,function(res){
-		res.forEach(function(app){
-			//grab template and render
-			var template = $("<section></section>");
-			template.load("templates/project.html",function(){
+		var sharedTemplate = $("<section></section>");
+		sharedTemplate.load("templates/project.html",function(){
+			res.forEach(function(app){
+				var template = sharedTemplate.clone();
 				template.find('.projectname').text(app["title"]);
 				template.find('.subtitlename').text(app["subtitle"]);
 				template.find('.date').text(app["date"]);
