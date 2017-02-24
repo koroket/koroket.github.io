@@ -13,6 +13,9 @@ var confApps = {
 		},{
 			'id' : 'partial',
 			'allowEmpty' : true
+		},{
+			'id' : 'callable',
+			'allowEmpty' : true
 		}]
 	}
 }

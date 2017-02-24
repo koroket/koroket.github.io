@@ -97,7 +97,16 @@ function loadApps() {
 				var srcURL = "http://drive.google.com/uc?export=view&id=" + app["img_url"];
 				template.find('.app-image').attr('src',srcURL);
 				if (isApp) {
-					template.on('click',appOnClick(app["partial"]));
+					if (typeof app["partial"] === "string" && app["partial"].length > 0) {
+						template.on('click',appOnClick(app["partial"]));
+					} else if (typeof app["callable"] === "string" && app["callable"].length > 0) {
+						var call_id = app["callable"];
+						if (typeof registerables[call_id] === "undefined") {
+							console.log("Unrecognized registerable");
+						} else {
+							template.on('click',registerables[call_id]);
+						}
+					}
 				} else {
 					template.find('a').attr('href',app["href"]);
 				}
@@ -225,4 +234,118 @@ $('.close-btn').on('click', function(){
 
 setGoogleSheetsAPIKey("AIzaSyC7DUWYxwwsz14ha9LybsvTWQ5z593REzg");
 
+var registerables = {
+	"camera": turnOnCamera
+};
+
 loadApps();
+
+$("#home-button").on("click",function(){
+	turnOffCamera();
+});
+
+$("#device-inner-camera").on("click",function(){
+	turnOnCamera();
+});
+
+$("#photo-button-inner").on("click",function(){
+	notify({
+		"title" : "Oops",
+		"message" : "This feature is not yet available"
+	});
+	// var video = $("#camera-screen").find("video")[0];
+	// var canvas = document.createElement("canvas");
+ //  canvas.width = video.videoWidth;
+ //  canvas.height = video.videoHeight;
+ //  canvas.getContext('2d').drawImage(video, 0, 0, canvas.width, canvas.height);
+ // 	canvas.toDataURL();
+ // 	var iframe = document.createElement("iframe");
+ //  iframe.src = "download.php?path=" + canvas.toDataURL();
+})
+
+var localStream;
+
+function turnOnCamera(){
+	$("#camera-screen").show();
+	navigator.getUserMedia({video: true, audio: false}, function(localMediaStream) {
+		localStream = localMediaStream;
+	  var video = $("#camera-screen").find("video");
+	  video.attr("src",window.URL.createObjectURL(localMediaStream));
+	},function(){
+		notify({
+			"title": "Unaccessable Camera",
+			"message": "No accessable camera device found",
+			"actions": [{
+				"text" : "OK",
+				"onClick" : function(e){
+					dismissNotification(e.target);
+					$("#camera-screen").hide();
+				}
+			}]
+		})
+	});
+}
+
+function turnOffCamera(){
+	if (typeof localStream !== "undefined") {
+		var video = $("#camera-screen").find("video");
+		video.attr("src","");
+		localStream.getTracks()[0].stop();
+		localStream = undefined;
+	}
+	$("#camera-screen").hide();
+}
+
+function showOverlay() {
+	$("#device-overlay").show();
+}
+
+function hideOverlay() {
+	$("#device-overlay").hide();
+}
+
+function dismissNotification(obj) {
+	hideOverlay();
+	$(obj).parents('.notification-container').remove();
+}
+
+function notify(info){
+	showOverlay();
+	var template = $("<div></div>");
+	template.addClass("notification-container");
+	template.load("templates/notification.html",function(){
+		var target = template.find(".notification-title");
+		if (typeof info["title"] !== 'undefined') {
+			target.text(info["title"]);
+		} else {
+			target.remove();
+		}
+
+		target = template.find(".notification-message");
+		if (typeof info["message"] !== 'undefined') {
+			target.text(info["message"]);
+		} else {
+			target.remove();
+		}
+
+		var container = template.find(".notification-actions");
+		if (typeof info["actions"] === 'object') {
+			info["actions"].forEach(function(action){
+				var newAction = $("<div></div>");
+				newAction.text(action["text"]);
+				newAction.on("click",action["onClick"]);
+				container.append(newAction);
+			});
+		} else {
+			//Use default OK dismisser
+			var newAction = $("<div></div>");
+			newAction.text("OK");
+			newAction.on("click",function(e){ dismissNotification(e.target); });
+			container.append(newAction);
+		}
+		$("#device-overlay").append(template);
+	});
+}
+
+
+
