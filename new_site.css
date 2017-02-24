@@ -799,13 +799,15 @@ body {
     line-height: 40px;
     color: cornflowerblue;
 }
-.notification-actions div {
+.notification-actions a {
     background: lightgray;
     display: table-cell;
+    text-decoration: none;
 }
-.notification-actions div:hover {
+.notification-actions a:hover {
     cursor: pointer;
     background-color: darkgray;
+    text-decoration: none;
 }
 
 /*

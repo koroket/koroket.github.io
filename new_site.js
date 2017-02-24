@@ -94,7 +94,7 @@ function loadApps() {
 			var templateType = isApp ? "inapp" : "external";
 			template.load("templates/" + templateType + ".html",function(){
 				template.find('.app-name').text(app["name"]);
-				var srcURL = "http://drive.google.com/uc?export=view&id=" + app["img_url"];
+				var srcURL = "https://drive.google.com/uc?export=view&id=" + app["img_url"];
 				template.find('.app-image').attr('src',srcURL);
 				if (isApp) {
 					if (typeof app["partial"] === "string" && app["partial"].length > 0) {
@@ -249,18 +249,27 @@ $("#device-inner-camera").on("click",function(){
 });
 
 $("#photo-button-inner").on("click",function(){
+	var video = $("#camera-screen").find("video")[0];
+	var canvas = document.createElement("canvas");
+	canvas.width = video.videoWidth;
+	canvas.height = video.videoHeight;
+	canvas.getContext('2d').drawImage(video, 0, 0, canvas.width, canvas.height);
+	var fileName = "selfie.png";
 	notify({
-		"title" : "Oops",
-		"message" : "This feature is not yet available"
+		"title" : "Save Photo?",
+		"message" : "Will download as '" + fileName + "'",
+		"actions" : [{
+			"text" : "Yes",
+			"onLoad" : function(obj) {
+				obj.attr("href",canvas.toDataURL());
+				obj.attr("download",fileName);
+			},
+			"onClick" : function(e){ }
+		},{
+			"text" : "Cancel",
+			"onClick" : function(e){ dismissNotification(e.target); }
+		}]
 	});
-	// var video = $("#camera-screen").find("video")[0];
-	// var canvas = document.createElement("canvas");
- //  canvas.width = video.videoWidth;
- //  canvas.height = video.videoHeight;
- //  canvas.getContext('2d').drawImage(video, 0, 0, canvas.width, canvas.height);
- // 	canvas.toDataURL();
- // 	var iframe = document.createElement("iframe");
- //  iframe.src = "download.php?path=" + canvas.toDataURL();
 })
 
 var localStream;
@@ -331,9 +340,12 @@ function notify(info){
 		var container = template.find(".notification-actions");
 		if (typeof info["actions"] === 'object') {
 			info["actions"].forEach(function(action){
-				var newAction = $("<div></div>");
+				var newAction = $("<a></a>");
 				newAction.text(action["text"]);
 				newAction.on("click",action["onClick"]);
+				if (typeof action["onLoad"] === 'function') {
+					action["onLoad"](newAction);
+				}
 				container.append(newAction);
 			});
 		} else {
