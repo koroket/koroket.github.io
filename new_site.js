@@ -264,7 +264,7 @@ $("#photo-button-inner").on("click",function(){
 				obj.attr("href",canvas.toDataURL());
 				obj.attr("download",fileName);
 			},
-			"onClick" : function(e){ }
+			"onClick" : function(e){ dismissNotification(e.target); }
 		},{
 			"text" : "Cancel",
 			"onClick" : function(e){ dismissNotification(e.target); }
