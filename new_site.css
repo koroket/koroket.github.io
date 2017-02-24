@@ -810,6 +810,23 @@ body {
     text-decoration: none;
 }
 
+/*Time diplay*/
+
+@-webkit-keyframes flash {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+.flash {
+    -webkit-animation-duration: 1s;
+    -webkit-animation-name: flash;
+    @include vendor-prefix(animation, flash);
+}
+
 /*
     -webkit-animation-name: example;
     -webkit-animation-duration: 4s;

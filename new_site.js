@@ -394,5 +394,24 @@ function notify(info){
 	});
 }
 
+var _clock = $(".middle-status-item");
+updateTime();
 
+function getFullDigits(i) {
+	return (i < 10) ? "0" + i : i;
+}
 
+function updateTime() {
+	var d = new Date();
+	var millisecondsInMinute = 60000;
+	var currentMilliseconds = (d.getSeconds() * 1000) * d.getMilliseconds();
+	var remainingMilliseconds = millisecondsInMinute - (currentMilliseconds % millisecondsInMinute);
+	setTimeout(updateTime, remainingMilliseconds);
+  var h = d.getHours();
+  var m = getFullDigits(d.getMinutes());
+  _clock.text(h + ":" + m);
+  _clock.addClass("flash");
+  setTimeout(function(){
+  	_clock.removeClass("flash");
+  }, 2000);
+}
