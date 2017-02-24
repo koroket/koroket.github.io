@@ -86,33 +86,62 @@ function appOnClick(partial) {
 	}
 }
 
-function loadApps() {
-	parseGoogleSheets(confApps,function(res){
+function preloadAppTemplates() {
+	appTemplates.forEach(function(templateType){
+		//For availability report while loading
+		cachedTemplates[templateType] = false;
+		var template = $("<div></div>");
+		template.load("templates/" + templateType + ".html",function(){
+			cachedTemplates[templateType] = template;
+		});
+	});
+}
+
+function isAppTemplatesLoaded() {
+	appTemplates.forEach(function(templateType){
+		if (typeof cachedTemplates[templateType] !== "object") {
+			return false;
+		}
+	});
+	return true;
+}
+
+/*
+*  Keep spinning if templates have not loaded
+*/
+function loadAppsHelper(res) {
+	if (isAppTemplatesLoaded()) {
 		res.forEach(function(app){
-			var template = $("<div></div>");
 			var isApp = (typeof(app["href"]) !== "string") || app["href"].length === 0;
 			var templateType = isApp ? "inapp" : "external";
-			template.load("templates/" + templateType + ".html",function(){
-				template.find('.app-name').text(app["name"]);
-				var srcURL = "https://drive.google.com/uc?export=view&id=" + app["img_url"];
-				template.find('.app-image').attr('src',srcURL);
-				if (isApp) {
-					if (typeof app["partial"] === "string" && app["partial"].length > 0) {
-						template.on('click',appOnClick(app["partial"]));
-					} else if (typeof app["callable"] === "string" && app["callable"].length > 0) {
-						var call_id = app["callable"];
-						if (typeof registerables[call_id] === "undefined") {
-							console.log("Unrecognized registerable");
-						} else {
-							template.on('click',registerables[call_id]);
-						}
+			var template = cachedTemplates[templateType].clone();
+			template.find('.app-name').text(app["name"]);
+			var srcURL = "https://drive.google.com/uc?export=view&id=" + app["img_url"];
+			template.find('.app-image').attr('src',srcURL);
+			if (isApp) {
+				if (typeof app["partial"] === "string" && app["partial"].length > 0) {
+					template.on('click',appOnClick(app["partial"]));
+				} else if (typeof app["callable"] === "string" && app["callable"].length > 0) {
+					var call_id = app["callable"];
+					if (typeof registerables[call_id] === "undefined") {
+						console.log("Unrecognized registerable");
+					} else {
+						template.on('click',registerables[call_id]);
 					}
-				} else {
-					template.find('a').attr('href',app["href"]);
 				}
-				$("#home-content").append(template);
-			});
+			} else {
+				template.find('a').attr('href',app["href"]);
+			}
+			$("#home-content").append(template);
 		})
+	} else {
+		setTimeout(function() { loadAppsHelper(res) }, 500);
+	}
+}
+
+function loadApps() {
+	parseGoogleSheets(confApps,function(res){
+		loadAppsHelper(res);
 	});
 }
 
@@ -228,15 +257,20 @@ function loadProjects() {
 
 var appLocked = false;
 
+var registerables = {
+	"camera": turnOnCamera
+};
+
+var cachedTemplates = {};
+var appTemplates = ["inapp","external"];
+
 $('.close-btn').on('click', function(){
 	$(this).closest('#current-content').hide();
 });
 
 setGoogleSheetsAPIKey("AIzaSyC7DUWYxwwsz14ha9LybsvTWQ5z593REzg");
 
-var registerables = {
-	"camera": turnOnCamera
-};
+preloadAppTemplates();
 
 loadApps();
 
