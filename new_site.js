@@ -99,7 +99,7 @@ function preloadAppTemplates() {
 
 function isAppTemplatesLoaded() {
 	appTemplates.forEach(function(templateType){
-		if (typeof cachedTemplates[templateType] !== "object") {
+		if (cachedTemplates[templateType] instanceof jQuery) {
 			return false;
 		}
 	});
