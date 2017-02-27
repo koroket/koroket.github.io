@@ -259,11 +259,14 @@ function loadProjects() {
 var appLocked = false;
 
 var registerables = {
-	"camera": turnOnCamera
+	"camera": turnOnCamera,
+	"resume": showResumeDialog
 };
 
 var cachedTemplates = {};
 var appTemplates = ["inapp","external"];
+
+var _resumeURL = "https://docs.google.com/document/export?format=pdf&id=1dG-8LyZskVpyommw-ccPTpkeXSsetQuMxedMJ1hNFMU";
 
 $('.close-btn').on('click', function(){
 	$(this).closest('#current-content').hide();
@@ -415,3 +418,71 @@ function updateTime() {
   	_clock.removeClass("flash");
   }, 2000);
 }
+
+function showResumeDialog(){
+	if (typeof _downloadedResumeURL !== "string") {
+		loadResume(showResumeDialog);
+	} else {
+		hideLoading();
+		notify({
+			"title" : "Masa's Resume",
+			"message" : "Would you like to view or download?",
+			"actions" : [{
+				"text" : "View",
+				"onLoad" : function(obj) {
+					obj.attr("href",_downloadedResumeURL);
+					obj.attr("target","_blank");
+				},
+				"onClick" : function(e){ dismissNotification(e.target); }
+			},{
+				"text" : "Download",
+				"onLoad" : function(obj) {
+					obj.attr("href",_downloadedResumeURL);
+					obj.attr("download","Masakazu_Bando_Resume.pdf");
+				},
+				"onClick" : function(e){ dismissNotification(e.target); }
+			},{
+				"text" : "Cancel",
+				"onClick" : function(e){ dismissNotification(e.target); }
+			}]
+		});
+	}
+}
+
+function loadResume(callback){
+	displayLoading();
+	var xhr = new XMLHttpRequest();
+	xhr.onreadystatechange = function(){
+		va = this;
+    if (this.readyState == 4 && this.status == 200){
+      var url = window.URL || window.webkitURL;
+      _downloadedResumeURL = url.createObjectURL(this.response);
+      if (typeof callback === 'function') {
+      	callback(_downloadedResumeURL);
+      }	    
+    }
+    if (this.status !== 200 && this.status !== 0) {
+    	hideLoading();
+    }
+	}
+	xhr.open('GET', _resumeURL);
+	xhr.responseType = 'blob';
+	xhr.send(); 
+}
+
+function displayLoading(){
+	showOverlay();
+	var template = $("<div></div>");
+	template.addClass("notification-container");
+	template.addClass("loading-container");
+	template.load("templates/loader.html",function(){
+		$("#device-overlay").append(template);
+	});
+}
+
+function hideLoading(){
+	$(".loading-container").remove();
+	hideOverlay();
+}
+
+
