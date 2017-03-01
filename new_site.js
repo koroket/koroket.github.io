@@ -98,12 +98,14 @@ function preloadAppTemplates() {
 }
 
 function isAppTemplatesLoaded() {
-	appTemplates.forEach(function(templateType){
+	var allLoaded = true;
+	appTemplates.every(function(templateType){
 		if (!(cachedTemplates[templateType] instanceof jQuery)) {
+			allLoaded = false;
 			return false;
 		}
 	});
-	return true;
+	return allLoaded;
 }
 
 /*
