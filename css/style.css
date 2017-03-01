@@ -56,9 +56,7 @@
 #cd-timeline::before {
   /* this is the vertical line */
   content: '';
-  position: absolute;
-  top: 0;
-  left: 18px;
+  position: fixed;
   height: 100%;
   width: 4px;
   background: #d7e4ed;
